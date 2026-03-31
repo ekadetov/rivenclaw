@@ -1,50 +1,73 @@
 # rivenclaw
 
-> A Rust implementation of an AI coding assistant harness -- tool wiring, agent loop, and context management.
+**Build an AI coding assistant from scratch. In Rust.**
+
+No Python. No magic. Just Rust, tokio, and the raw plumbing of an AI agent -- built live, slice by slice, with YouTube videos at every step.
 
 ---
 
-## What this is
+## 🦀 Why This Exists
 
-rivenclaw is a minimal, auditable AI coding assistant runtime written in Rust. It focuses on the core plumbing: how tools are declared and executed, how an agent loop is orchestrated, and how context is managed across a session.
+Most AI tooling is a black box. rivenclaw tears it open.
 
-## Repository Layout
+You will build every layer yourself:
 
-```text
-.
-├── src/
-│   ├── main.rs            # CLI entrypoint
-│   ├── agent/             # Agent loop and orchestration
-│   ├── tools/             # Tool implementations (read, write, bash, glob, grep)
-│   ├── harness/           # Permission model and hook system
-│   └── context/           # Context window and message history
-├── tests/                 # Integration and unit tests
-├── Cargo.toml
-└── README.md
+```
+  prompt
+    |
+    v
++----------+     +----------+     +----------+
+|  context |---->|  agent   |---->|  tools   |
+|  window  |     |   loop   |     | read/bash|
++----------+     +----------+     +----------+
+                      |
+                      v
+               +----------+
+               | harness  |  <-- permissions + hooks
+               +----------+
+                      |
+                      v
+              Anthropic API
 ```
 
-## Status
+Each box is a Rust module. Each module ships in a slice. Each slice has a video.
 
-Early stage. Tool wiring and the core agent loop are the current focus.
+---
 
-## Quickstart
+## 🎬 Follow Along
+
+| Slice | Feature                  | Video |
+|-------|--------------------------|-------|
+| 00    | Project scaffold         | soon  |
+| 01    | CLI + clap               | soon  |
+| 02    | Tool trait + Read tool   | soon  |
+| 03    | Context window           | soon  |
+| 04    | Anthropic API call       | soon  |
+| 05    | Agent loop               | soon  |
+| 06    | Permission harness       | soon  |
+
+---
+
+## 🚀 Quickstart
 
 ```bash
-# Build
 cargo build --release
-
-# Run
 ./target/release/rivenclaw "explain this codebase"
-
-# Test
 cargo test
 ```
 
-## Contributing
+---
 
-Contributions are welcome. Open an issue or submit a PR -- all skill levels encouraged.
+## 💡 What You Will Learn
 
-Areas that need help:
-- Tool implementations
-- Test coverage
-- Documentation
+- Rust async with tokio
+- Trait objects for pluggable tools
+- Ownership inside a stateful agent loop
+- Context window and message history management
+- Calling the Anthropic API from Rust
+
+---
+
+## 🤝 Contributing
+
+Open an issue. Submit a PR. All skill levels welcome.
