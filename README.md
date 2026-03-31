@@ -1,12 +1,21 @@
 # rivenclaw
 
-**Build an AI coding assistant from scratch. In Rust.**
+![rivenclaw banner](assets/banner.png)
 
-No magic. No black boxes. Just the raw plumbing -- built live, one slice at a time, with a YouTube video at every step.
+Learn Rust and agentic coding by building a Claude Code sibling from scratch.
+
+No magic. No black boxes. Just the raw plumbing -- built live, one vertical slice at a time.
+
+Each slice is guided by Claude Code. The meta-twist: Claude Code builds its own Rust sibling.
 
 ---
 
-## The Stack
+## What You Are Building
+
+A working AI coding assistant in Rust -- rivenclaw is the Rust sibling of Claude Code.
+By the end you will have a CLI that takes a prompt, talks to the Anthropic API,
+runs tools (read, write, bash, glob, grep), manages a context window, enforces
+permissions, fires hooks, and can spawn sub-agents.
 
 ```
   your prompt
@@ -31,11 +40,32 @@ No magic. No black boxes. Just the raw plumbing -- built live, one slice at a ti
 
 ---
 
+## What You Will Learn
+
+**Rust fundamentals:**
+- Ownership, borrowing, and lifetimes in a real async codebase
+- Trait objects for a pluggable tool interface
+- `Result` / `?` error propagation with `anyhow`
+- `tokio` async runtime and streaming with Server-Sent Events
+- `serde_json` for API request/response serialization
+- `clap` derive macros for CLI argument parsing
+- `rstest` for parameterized and fixture-based tests
+
+**Agentic systems:**
+- How an agent loop works: stream tokens, detect tool calls, execute, loop
+- Concurrent vs serial tool batching decisions
+- Context window management and message compaction
+- Permission rule evaluation (allow / deny / ask)
+- Hook execution: PreToolUse, PostToolUse, Stop
+- Spawning and orchestrating sub-agents
+
+---
+
 ## Slices + Videos
 
-| # | Feature | Video |
-|---|---------|-------|
-| 00 | Project scaffold + Cargo layout | coming |
+| # | Feature | Status |
+|---|---------|--------|
+| 00 | Project scaffold + Cargo layout | done |
 | 01 | CLI with clap | coming |
 | 02 | Tool trait + Read / Write / Edit | coming |
 | 03 | Bash tool (timeout, safety) | coming |
@@ -53,22 +83,10 @@ No magic. No black boxes. Just the raw plumbing -- built live, one slice at a ti
 ## Quickstart
 
 ```bash
-cargo build --release
-./target/release/rivenclaw "explain this codebase"
+cargo build
 cargo test
+./target/debug/rivenclaw "explain this codebase"
 ```
-
----
-
-## What You Will Learn
-
-- Streaming API responses with tokio async generators
-- Trait objects for a pluggable tool interface
-- Concurrent vs serial tool batching in an agent loop
-- Borrow-safe context window and message compaction
-- Permission rule evaluation (allow / deny / ask)
-- Hook execution: shell, prompt, and http hooks
-- Spawning and orchestrating sub-agents from Rust
 
 ---
 
