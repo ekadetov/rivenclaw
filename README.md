@@ -2,53 +2,55 @@
 
 **Build an AI coding assistant from scratch. In Rust.**
 
-No Python. No magic. Just Rust, tokio, and the raw plumbing of an AI agent -- built live, slice by slice, with YouTube videos at every step.
+No magic. No black boxes. Just the raw plumbing -- built live, one slice at a time, with a YouTube video at every step.
 
 ---
 
-## 🦀 Why This Exists
-
-Most AI tooling is a black box. rivenclaw tears it open.
-
-You will build every layer yourself:
+## The Stack
 
 ```
-  prompt
-    |
-    v
-+----------+     +----------+     +----------+
-|  context |---->|  agent   |---->|  tools   |
-|  window  |     |   loop   |     | read/bash|
-+----------+     +----------+     +----------+
-                      |
-                      v
-               +----------+
-               | harness  |  <-- permissions + hooks
-               +----------+
-                      |
-                      v
-              Anthropic API
+  your prompt
+      |
+      v
++----------+    +-------------------+    +------------------------+
+|  context |    |    agent loop     |    |        tools           |
+|  window  |--->|  stream -> tools  |--->|  read / write / bash   |
+| compact  |    |  -> stream -> ... |    |  glob / grep / agent   |
++----------+    +-------------------+    +------------------------+
+                        |
+                        v
+               +-------------------+
+               |     harness       |
+               |  permissions      |
+               |  hooks (pre/post) |
+               +-------------------+
+                        |
+                        v
+               Anthropic Streaming API
 ```
 
-Each box is a Rust module. Each module ships in a slice. Each slice has a video.
+---
+
+## Slices + Videos
+
+| # | Feature | Video |
+|---|---------|-------|
+| 00 | Project scaffold + Cargo layout | coming |
+| 01 | CLI with clap | coming |
+| 02 | Tool trait + Read / Write / Edit | coming |
+| 03 | Bash tool (timeout, safety) | coming |
+| 04 | Glob + Grep tools | coming |
+| 05 | Anthropic API + streaming | coming |
+| 06 | Agent loop (the query cycle) | coming |
+| 07 | Permission harness + allow/deny rules | coming |
+| 08 | Hook system (PreToolUse / PostToolUse / Stop) | coming |
+| 09 | Context window + auto-compact | coming |
+| 10 | Sub-agents (spawn + orchestrate) | coming |
+| 11 | MCP client integration | coming |
 
 ---
 
-## 🎬 Follow Along
-
-| Slice | Feature                  | Video |
-|-------|--------------------------|-------|
-| 00    | Project scaffold         | soon  |
-| 01    | CLI + clap               | soon  |
-| 02    | Tool trait + Read tool   | soon  |
-| 03    | Context window           | soon  |
-| 04    | Anthropic API call       | soon  |
-| 05    | Agent loop               | soon  |
-| 06    | Permission harness       | soon  |
-
----
-
-## 🚀 Quickstart
+## Quickstart
 
 ```bash
 cargo build --release
@@ -58,16 +60,24 @@ cargo test
 
 ---
 
-## 💡 What You Will Learn
+## What You Will Learn
 
-- Rust async with tokio
-- Trait objects for pluggable tools
-- Ownership inside a stateful agent loop
-- Context window and message history management
-- Calling the Anthropic API from Rust
+- Streaming API responses with tokio async generators
+- Trait objects for a pluggable tool interface
+- Concurrent vs serial tool batching in an agent loop
+- Borrow-safe context window and message compaction
+- Permission rule evaluation (allow / deny / ask)
+- Hook execution: shell, prompt, and http hooks
+- Spawning and orchestrating sub-agents from Rust
 
 ---
 
-## 🤝 Contributing
+## Stack
 
-Open an issue. Submit a PR. All skill levels welcome.
+`tokio` -- `clap` -- `serde_json` -- `anyhow` -- `rstest`
+
+---
+
+## Contributing
+
+Open an issue. Ship a PR. All skill levels welcome -- follow the slice you are on.
